@@ -37,6 +37,7 @@ public class SecurityConfig {
                         .requestMatchers("/fastx/api/bus/add").hasAuthority("OPERATOR")
                         // Seat
                         .requestMatchers("/fastx/add/seat/{busId}").hasAuthority("OPERATOR")
+                        .requestMatchers("/fastx/get/seat").hasAuthority("CUSTOMER")
                         // Bus Route
                         .requestMatchers("/fastx/api/bus-route/add").permitAll()
                         // Schedule

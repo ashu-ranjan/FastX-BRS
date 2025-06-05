@@ -39,7 +39,6 @@ public class SeatController {
 
     @GetMapping("/fastx/get/seat")
     public ResponseEntity<?> getAvailableSeats(@RequestParam int scheduleId){
-        List<Seat> seats = seatService.getAvailableSeatsForSchedule(scheduleId);
-        return ResponseEntity.ok(seats);
+        return ResponseEntity.ok(seatService.getAvailableSeatsForSchedule(scheduleId));
     }
 }

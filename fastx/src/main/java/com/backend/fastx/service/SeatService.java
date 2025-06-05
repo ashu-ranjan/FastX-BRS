@@ -1,5 +1,6 @@
 package com.backend.fastx.service;
 
+import com.backend.fastx.dto.SeatResponseDTO;
 import com.backend.fastx.exception.ResourceNotFoundException;
 import com.backend.fastx.exception.UnauthorizedBusAccessException;
 import com.backend.fastx.model.Bus;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SeatService {
@@ -43,11 +45,20 @@ public class SeatService {
         return seatRepository.save(seat);
     }
 
-    public List<Seat> getAvailableSeatsForSchedule(int scheduleId) {
+    public List<SeatResponseDTO> getAvailableSeatsForSchedule(int scheduleId) {
         Schedule schedule = scheduleRepository.findById(scheduleId)
                 .orElseThrow(()-> new ResourceNotFoundException("Schedule Not Found"));
+
         int busId = schedule.getBus().getId();
-        return seatRepository.findByBusIdAndIsActiveTrue(busId);
+
+        List<Seat> seats = seatRepository.findByBusIdAndIsActiveTrue(busId);
+
+        return seats.stream().map(seat -> new SeatResponseDTO(
+                seat.getId(),
+                seat.getSeatNumber(),
+                seat.getSeatType(),
+                seat.isActive()
+        )).collect(Collectors.toList());
     }
 
 }
