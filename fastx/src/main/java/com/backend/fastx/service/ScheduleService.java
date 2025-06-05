@@ -76,6 +76,7 @@ public class ScheduleService {
         List<Schedule> schedules = scheduleRepository.findByOriginDestinationAndDay(origin,destination,days);
 
         return schedules.stream().map(schedule -> new BusScheduleDto(
+                schedule.getId(),
                 schedule.getBus().getBusName(),
                 schedule.getBus().getBusType().name(),
                 schedule.getDepartureTime(),

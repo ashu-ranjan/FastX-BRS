@@ -46,6 +46,7 @@ public class SecurityConfig {
                         .requestMatchers("/fastx/api/schedules/search").hasAuthority("CUSTOMER")
                         // Booking
                         .requestMatchers("/fastx/api/book").permitAll()
+                        .requestMatchers("/fastx/api/payment/make-payment").hasAuthority("CUSTOMER")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)

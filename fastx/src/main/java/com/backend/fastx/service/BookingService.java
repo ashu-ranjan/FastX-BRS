@@ -38,7 +38,7 @@ public class BookingService {
         booking.setCustomer(customer);
         booking.setSchedule(schedule);
         booking.setBookedOn(new Timestamp(System.currentTimeMillis()));
-        booking.setStatus(BookingStatus.CONFIRMED);
+        booking.setStatus(BookingStatus.PENDING);
 
         // Save booking early to generate ID (used in BookingDetails)
         Booking savedBooking = bookingRepository.save(booking);
