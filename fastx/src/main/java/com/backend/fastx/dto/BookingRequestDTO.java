@@ -1,8 +1,5 @@
 package com.backend.fastx.dto;
 
-
-import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 public class BookingRequestDTO {

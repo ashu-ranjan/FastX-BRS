@@ -4,6 +4,7 @@ import com.backend.fastx.enums.BookingStatus;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "booking")
@@ -15,6 +16,9 @@ public class Booking {
 
     @Column(name = "booked_on")
     private Timestamp bookedOn;
+
+    @Column(name = "journey_date")
+    private LocalDate journeyDate;
 
     @Column(name = "total_seat")
     private int totalSeat;
@@ -84,5 +88,13 @@ public class Booking {
 
     public void setSchedule(Schedule schedule) {
         this.schedule = schedule;
+    }
+
+    public LocalDate getJourneyDate() {
+        return journeyDate;
+    }
+
+    public void setJourneyDate(LocalDate journeyDate) {
+        this.journeyDate = journeyDate;
     }
 }

@@ -40,9 +40,10 @@ public class SecurityConfig {
                         // Bus Route
                         .requestMatchers("/fastx/api/bus-route/add").permitAll()
                         // Schedule
-                        .requestMatchers("/fastx/api/schedules/create").hasAnyAuthority("OPERATOR","EXECUTIVE")
+                        .requestMatchers("/fastx/api/schedules/create/bus/{busId}/route/{routeId}").hasAnyAuthority("OPERATOR","EXECUTIVE")
                         .requestMatchers("/fastx/api/schedules/all").permitAll()
                         .requestMatchers("/fastx/api/schedules/id/{id}").permitAll()
+                        .requestMatchers("/fastx/api/schedules/search").hasAuthority("CUSTOMER")
                         // Booking
                         .requestMatchers("/fastx/api/book").permitAll()
                         .anyRequest().authenticated()

@@ -1,11 +1,15 @@
 package com.backend.fastx.controller;
 
+import com.backend.fastx.dto.BusScheduleDto;
 import com.backend.fastx.model.Schedule;
 import com.backend.fastx.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/fastx/api/schedules")
@@ -28,6 +32,22 @@ public class ScheduleController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(scheduleService.createSchedule(schedule, busId, routeId));
+    }
+
+    /*
+     * AIM: Search buses
+     * PATH: /fastx/search
+     * METHOD: GET
+     * RESPONSE: List<Schedule>
+     * Authority: CUSTOMER
+     * */
+
+    @GetMapping("/search")
+    public ResponseEntity<?> getScheduleByRouteAndDate(@RequestParam String origin,
+                                                       @RequestParam String destination,
+                                                       @RequestParam LocalDate date){
+        List<BusScheduleDto> response = scheduleService.getScheduleByRouteAndDate(origin,destination,date);
+        return ResponseEntity.ok(response);
     }
 
     /*

@@ -1,6 +1,6 @@
 package com.backend.fastx.model;
 
-import com.backend.fastx.enums.Day;
+import com.backend.fastx.enums.ScheduleDays;
 import jakarta.persistence.*;
 
 import java.time.Duration;
@@ -13,8 +13,8 @@ public class Schedule {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "day")
-    private Day day;
+    @Enumerated(EnumType.STRING)
+    private ScheduleDays scheduleDays;
 
     @Column(name = "departure_time")
     private LocalTime departureTime;
@@ -71,14 +71,6 @@ public class Schedule {
         this.busRoute = busRoute;
     }
 
-    public Day getDay() {
-        return day;
-    }
-
-    public void setDay(Day day) {
-        this.day = day;
-    }
-
     public Duration getDuration() {
         return duration;
     }
@@ -93,5 +85,13 @@ public class Schedule {
 
     public void setBaseFare(double baseFare) {
         this.baseFare = baseFare;
+    }
+
+    public ScheduleDays getScheduleDays() {
+        return scheduleDays;
+    }
+
+    public void setScheduleDays(ScheduleDays scheduleDays) {
+        this.scheduleDays = scheduleDays;
     }
 }

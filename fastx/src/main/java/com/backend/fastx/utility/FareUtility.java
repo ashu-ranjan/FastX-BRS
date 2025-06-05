@@ -4,6 +4,28 @@ import com.backend.fastx.model.Schedule;
 import com.backend.fastx.model.Seat;
 
 public class FareUtility {
+    public static double calculateBusFare(Schedule schedule){
+
+        double base = schedule.getBaseFare();
+
+        // Bus type pricing
+        switch (schedule.getBus().getBusType()){
+            case NON_AC_SEATER -> base += 100;
+            case AC_SEATER -> base += 200;
+            case NON_AC_SEMI_SLEEPER -> base += 150;
+            case AC_SEMI_SLEEPER -> base += 250;
+            case NON_AC_SLEEPER -> base += 270;
+            case AC_SLEEPER -> base += 300;
+            default -> base += 0;
+        }
+
+        // Route-based distance pricing
+        if (schedule.getBusRoute() != null && schedule.getBusRoute().getDistance() > 0){
+            base += schedule.getBusRoute().getDistance() * 0.4;
+        }
+        return base;
+    }
+
     public static double calculateSeatFare(Schedule schedule, Seat seat){
         double base = schedule.getBaseFare();
 

@@ -1,9 +1,7 @@
 package com.backend.fastx.dto;
 
 import com.backend.fastx.enums.Gender;
-import org.springframework.stereotype.Component;
 
-@Component
 public class PassengerDTO {
     private String passenger;
     private int age;

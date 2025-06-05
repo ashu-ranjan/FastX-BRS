@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 public class ScheduleUtility {
 
     public void validateSchedule(Schedule schedule){
-        if (schedule.getDay() == null) {
-            throw new InvalidInputException("Journey Date is required.");
+        if (schedule.getScheduleDays() == null) {
+            throw new InvalidInputException("Journey Day is required.");
         }
         if (schedule.getDepartureTime() == null) {
             throw new InvalidInputException("Departure Time is required.");
