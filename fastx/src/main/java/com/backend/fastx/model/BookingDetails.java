@@ -23,6 +23,8 @@ public class BookingDetails {
     @Column(name = "dropping_point")
     private String droppingPoint;
 
+    private boolean isCancelled = false; // for cancelling booking (soft delete)
+
     @ManyToOne
     private Booking booking;
 
@@ -91,5 +93,13 @@ public class BookingDetails {
 
     public void setBooking(Booking booking) {
         this.booking = booking;
+    }
+
+    public boolean isCancelled() {
+        return isCancelled;
+    }
+
+    public void setCancelled(boolean cancelled) {
+        isCancelled = cancelled;
     }
 }

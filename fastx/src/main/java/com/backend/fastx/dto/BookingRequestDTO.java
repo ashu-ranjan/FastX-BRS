@@ -1,10 +1,12 @@
 package com.backend.fastx.dto;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class BookingRequestDTO {
     private int customerId;
     private int scheduleId;
+    private LocalDate journeyDate;
     private List<PassengerDTO> passengers;
 
     public int getCustomerId() {
@@ -31,4 +33,11 @@ public class BookingRequestDTO {
         this.passengers = passengers;
     }
 
+    public LocalDate getJourneyDate() {
+        return journeyDate;
+    }
+
+    public void setJourneyDate(LocalDate journeyDate) {
+        this.journeyDate = journeyDate;
+    }
 }

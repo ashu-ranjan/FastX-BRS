@@ -1,6 +1,7 @@
 package com.backend.fastx;
 
 import com.backend.fastx.exception.*;
+import com.backend.fastx.exception.IllegalStateException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,6 +57,21 @@ public class GlobalExceptionHandler {
         return buildErrorResponse(e.getMessage(), HttpStatus.FORBIDDEN);
     }
 
+    @ExceptionHandler(exception = IllegalStateException.class)
+    public ResponseEntity<?> handleIllegalStateException(IllegalStateException e){
+        return buildErrorResponse(e.getMessage(), HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(exception = UnauthorizedAccessException.class)
+    public ResponseEntity<?> handleUnauthorizedAccessException(UnauthorizedAccessException e){
+        return buildErrorResponse(e.getMessage(), HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(exception = UserAccessDeniedException.class)
+    public ResponseEntity<?> handleUserAccessDeniedException(UserAccessDeniedException e){
+        return buildErrorResponse(e.getMessage(), HttpStatus.FORBIDDEN);
+    }
+
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<?> handleJsonParseError(HttpMessageNotReadableException e) {
         Throwable cause = e.getCause();
@@ -67,7 +83,10 @@ public class GlobalExceptionHandler {
                 cause instanceof InvalidBusTypeException ||
                 cause instanceof ResourceNotFoundException ||
                 cause instanceof InvalidSeatTypeException ||
-                cause instanceof UnauthorizedBusAccessException)
+                cause instanceof UnauthorizedBusAccessException ||
+                cause instanceof UnauthorizedAccessException ||
+                cause instanceof UserAccessDeniedException ||
+                cause instanceof IllegalStateException)
             {
                 return buildErrorResponse(cause.getMessage(), HttpStatus.BAD_REQUEST);
             }

@@ -4,6 +4,8 @@ import com.backend.fastx.enums.ScheduleDays;
 import jakarta.persistence.*;
 
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -15,6 +17,8 @@ public class Schedule {
 
     @Enumerated(EnumType.STRING)
     private ScheduleDays scheduleDays;
+
+    private LocalDate date;
 
     @Column(name = "departure_time")
     private LocalTime departureTime;
@@ -93,5 +97,13 @@ public class Schedule {
 
     public void setScheduleDays(ScheduleDays scheduleDays) {
         this.scheduleDays = scheduleDays;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

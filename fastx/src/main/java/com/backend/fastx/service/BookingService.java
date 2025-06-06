@@ -38,6 +38,7 @@ public class BookingService {
         booking.setCustomer(customer);
         booking.setSchedule(schedule);
         booking.setBookedOn(new Timestamp(System.currentTimeMillis()));
+        booking.setJourneyDate(bookingRequestDTO.getJourneyDate());
         booking.setStatus(BookingStatus.PENDING);
 
         // Save booking early to generate ID (used in BookingDetails)

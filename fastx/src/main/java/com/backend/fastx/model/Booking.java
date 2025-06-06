@@ -29,6 +29,7 @@ public class Booking {
     @Enumerated(EnumType.STRING) // To store enum value as string (CONFIRMED, CANCELLED, PENDING)
     private BookingStatus status;
 
+
     @ManyToOne
     private Customer customer; // One customer can have many bookings
     @ManyToOne
@@ -97,4 +98,5 @@ public class Booking {
     public void setJourneyDate(LocalDate journeyDate) {
         this.journeyDate = journeyDate;
     }
+
 }

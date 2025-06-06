@@ -3,7 +3,7 @@ package com.backend.fastx.model;
 import com.backend.fastx.enums.RefundStatus;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "cancellation")
@@ -13,7 +13,7 @@ public class Cancellation {
     private int id;
 
     @Column(name = "cancel_date")
-    private LocalDate cancelDate;
+    private LocalDateTime cancelDate;
 
     @Column(name = "refund_amount")
     private double refundAmount;
@@ -35,11 +35,11 @@ public class Cancellation {
         this.id = id;
     }
 
-    public LocalDate getCancelDate() {
+    public LocalDateTime getCancelDate() {
         return cancelDate;
     }
 
-    public void setCancelDate(LocalDate cancelDate) {
+    public void setCancelDate(LocalDateTime cancelDate) {
         this.cancelDate = cancelDate;
     }
 

@@ -9,6 +9,7 @@ import java.awt.print.Book;
 public enum BookingStatus {
     CONFIRMED,
     CANCELLED,
+    PARTIALLY_CANCELLED,
     PENDING;
 
     @JsonCreator

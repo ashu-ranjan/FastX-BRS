@@ -25,4 +25,6 @@ public class BookingController {
         bookingRequestDTO.setCustomerId(customerId);
         return ResponseEntity.ok(bookingService.createBooking(bookingRequestDTO));
     }
+
+
 }
