@@ -11,7 +11,6 @@ import com.backend.fastx.repository.BusRouteRepository;
 import com.backend.fastx.repository.ScheduleRepository;
 import com.backend.fastx.utility.FareUtility;
 import com.backend.fastx.utility.ScheduleUtility;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -26,7 +25,6 @@ public class ScheduleService {
     private final BusRepository busRepository;
     private final BusRouteRepository busRouteRepository;
 
-    @Autowired
     public ScheduleService(ScheduleRepository scheduleRepository,
                            ScheduleUtility scheduleUtility,
                            BusRepository busRepository,

@@ -2,9 +2,6 @@ package com.backend.fastx.enums;
 
 import com.backend.fastx.exception.InvalidInputException;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import org.hibernate.sql.results.graph.collection.internal.BagInitializer;
-
-import java.awt.print.Book;
 
 public enum BookingStatus {
     CONFIRMED,

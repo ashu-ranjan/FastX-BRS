@@ -5,7 +5,6 @@ import com.backend.fastx.model.Executive;
 import com.backend.fastx.model.User;
 import com.backend.fastx.repository.ExecutiveRepository;
 import com.backend.fastx.utility.ExecutiveUtility;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,7 +14,6 @@ public class ExecutiveService {
     private final ExecutiveUtility executiveUtility;
     private final UserService userService;
 
-    @Autowired
     public ExecutiveService(ExecutiveRepository executiveRepository, ExecutiveUtility executiveUtility, UserService userService) {
         this.executiveRepository = executiveRepository;
         this.executiveUtility = executiveUtility;

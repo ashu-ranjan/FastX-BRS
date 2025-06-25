@@ -10,7 +10,6 @@ import com.backend.fastx.repository.BookedSeatRepository;
 import com.backend.fastx.repository.BookingRepository;
 import com.backend.fastx.repository.CustomerRepository;
 import com.backend.fastx.repository.PaymentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +26,6 @@ public class PaymentService {
     private final PaymentGatewayService paymentGatewayService;
     private final BookedSeatRepository bookedSeatRepository;
 
-    @Autowired
     public PaymentService(PaymentRepository paymentRepository,
                           CustomerRepository customerRepository,
                           BookingRepository bookingRepository,

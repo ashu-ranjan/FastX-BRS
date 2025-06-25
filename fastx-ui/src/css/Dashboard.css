@@ -1,0 +1,479 @@
+/* Dashboard.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #4361ee;
+  --secondary-color: #3f37c9;
+  --accent-color: #4895ef;
+  --dark-color: #1a1a2e;
+  --light-color: #f8f9fa;
+  --success-color: #4cc9f0;
+  --warning-color: #f8961e;
+  --danger-color: #f72585;
+  --gray-color: #6c757d;
+  --light-gray: #e9ecef;
+}
+
+.dashboard-container {
+  padding: 2rem;
+  width: 100vw;
+  margin: 0 auto;
+}
+
+/* Welcome Section */
+.welcome-section {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  color: white;
+  box-shadow: 0 10px 20px rgba(67, 97, 238, 0.2);
+}
+
+.welcome-content {
+  max-width: 800px;
+}
+
+.heading-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.highlight-name {
+  color: #ffd166;
+}
+
+.heading-icon-wrapper {
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heading-icon {
+  font-size: 1.8rem;
+}
+
+.welcome-subtitle {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin-left: 4.5rem;
+}
+
+/* Section Titles */
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--dark-color);
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background-color: var(--primary-color);
+  border-radius: 3px;
+}
+
+/* Buses Grid */
+.buses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.bus-card {
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bus-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.bus-card-content {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.bus-icon-wrapper {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 1rem;
+  background-color: rgba(67, 97, 238, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bus-icon {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+}
+
+.bus-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--dark-color);
+}
+
+.bus-type {
+  color: var(--gray-color);
+  margin-bottom: 1.2rem;
+  font-size: 0.95rem;
+}
+
+.view-details-btn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.view-details-btn:hover {
+  background-color: var(--secondary-color);
+}
+
+.no-buses-message {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem;
+  color: var(--gray-color);
+}
+
+/* Stats Section */
+.stats-section {
+  margin: 2rem 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.stat-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.stat-icon-wrapper {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(67, 97, 238, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-icon {
+  font-size: 1.3rem;
+  color: var(--primary-color);
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--dark-color);
+  margin-bottom: 0.2rem;
+}
+
+.stat-label {
+  color: var(--gray-color);
+  font-size: 0.9rem;
+}
+
+/* Features Section */
+.features-section {
+  margin: 2rem 0;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.feature-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.feature-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--dark-color);
+}
+
+.feature-description {
+  color: var(--gray-color);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Footer Styles */
+.dashboard-footer {
+  background-color: var(--dark-color);
+  color: white;
+  padding: 2rem;
+  margin-top: 3rem;
+  border-radius: 12px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  max-width: 250px;
+}
+
+.footer-logo {
+  width: 150px;
+  height: auto;
+  margin-bottom: -3rem;
+}
+
+.brand-name {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.brand-tagline {
+  color: var(--light-gray);
+  font-size: 0.9rem;
+  margin: 0;
+  text-align: center;
+}
+
+.footer-columns {
+  display: flex;
+  gap: 3rem;
+}
+
+.footer-column {
+  min-width: 180px;
+}
+
+.column-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  color: var(--light-color);
+}
+
+.footer-links,
+.footer-contacts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li,
+.footer-contacts li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-links a {
+  color: var(--light-gray) !important; /* Ensure this is defined */
+  text-decoration: none;
+  transition: color 0.3s;
+  font-size: 0.9rem;
+  display: block;
+}
+
+.footer-links a:hover {
+  color: var(--primary-color);
+}
+
+.footer-contacts li {
+  color: var(--light-gray);
+  font-size: 0.9rem;
+}
+
+address {
+  font-style: normal;
+  color: var(--light-gray);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.footer-social {
+  display: flex;
+  justify-content: right;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+}
+
+.social-link {
+  color: white;
+  font-size: 1.2rem;
+  transition: color 0.3s;
+}
+
+.social-link:hover {
+  color: var(--primary-color);
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  
+  
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.copyright {
+  font-size: 0.85rem;
+  color: var(--light-gray);
+}
+
+.legal-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.legal-links a {
+  color: var(--light-gray);
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: color 0.3s;
+}
+
+.legal-links a:hover {
+  color: var(--primary-color);
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .footer-columns {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .dashboard-container {
+    padding: 1.5rem;
+  }
+  
+  .heading-title {
+    font-size: 2rem;
+  }
+  
+  .welcome-subtitle {
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .buses-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .footer-links {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .heading-title {
+    font-size: 1.8rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .heading-icon-wrapper {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .welcome-section {
+    padding: 1.5rem;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+}

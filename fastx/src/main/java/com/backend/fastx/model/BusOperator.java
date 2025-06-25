@@ -20,6 +20,8 @@ public class BusOperator {
     @Column(name = "company_address")
     private String companyAddress;
 
+    private String profilePic;
+
     @OneToOne
     private User user;
 
@@ -77,5 +79,13 @@ public class BusOperator {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+     public String getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
     }
 }

@@ -17,6 +17,9 @@ public class Executive {
 
     private String designation;
 
+    @Column(name = "profile_pic")
+    private String profilePic;
+
     @OneToOne
     private User user;
 
@@ -58,5 +61,13 @@ public class Executive {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
     }
 }

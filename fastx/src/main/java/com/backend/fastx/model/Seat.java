@@ -23,6 +23,8 @@ public class Seat {
     @Column(name = "seat_deck")
     private SeatDeck seatDeck;
 
+    private double price; // Assuming you might want to add a price for the seat
+
     private boolean isActive;// later after booking it shows false without booking its shows true
 
     @ManyToOne
@@ -74,5 +76,11 @@ public class Seat {
 
     public void setBus(Bus bus) {
         this.bus = bus;
+    }
+    public double getPrice() {
+        return price;
+    }
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

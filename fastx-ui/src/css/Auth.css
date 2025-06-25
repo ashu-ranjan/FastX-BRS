@@ -1,0 +1,245 @@
+/* Compact Login Styles */
+:root {
+    --primary-color: #4361ee;
+    --primary-light: #eef2ff;
+    --secondary-color: #3f37c9;
+    --dark-color: #1a1a2e;
+    --light-color: #f8f9fa;
+    --gray-color: #6c757d;
+    --light-gray: #e9ecef;
+}
+
+.compact-login-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: white;
+}
+
+.left-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background-color: #f8f9fa;
+}
+
+.logo-container {
+    margin-bottom: 10px;
+}
+
+.logo-image {
+    width: 200px;
+    height: auto;
+}
+
+.welcome-text {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.welcome-text h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: var(--dark-color);
+}
+
+.tagline {
+    color: var(--gray-color);
+    font-size: 1rem;
+    margin: 0;
+}
+
+.right-form {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 400px;
+}
+
+.form-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: var(--dark-color);
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: var(--dark-color);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--light-gray);
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    font-size: 0.9rem;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkmark {
+    height: 18px;
+    width: 18px;
+    background-color: white;
+    border: 1px solid var(--light-gray);
+    border-radius: 4px;
+    margin-right: 8px;
+}
+
+.checkbox-container input:checked ~ .checkmark {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.forgot-password {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.login-button {
+    width: 100%;
+    padding: 14px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.login-button:hover {
+    background-color: var(--secondary-color);
+}
+
+.register-link {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--gray-color);
+}
+
+.register-link a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.footer-links {
+    position: absolute;
+    bottom: 30px;
+    display: flex;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: var(--gray-color);
+}
+
+.footer-links a {
+    color: var(--gray-color);
+    text-decoration: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .compact-login-container {
+        flex-direction: column;
+    }
+    
+    .left-content {
+        padding: 30px 20px;
+    }
+    
+    .right-form {
+        padding: 20px;
+    }
+    
+    .footer-links {
+        position: static;
+        margin-top: 30px;
+        justify-content: center;
+    }
+}
+
+.brand-name {
+    font-weight: bold;
+    color: var(--primary-color);
+    text-align: center;
+    
+}
+
+.social-login {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 0.9rem;
+    color: var(--gray-color);
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.social-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.social-icon:hover {
+    transform: scale(1.1);
+}
+
+.social-icon.google {
+    color: #DB4437;
+}
+
+.social-icon.facebook {
+    color: #3b5998;
+}
+
+.social-icon.twitter {
+    color: #1da1f2;
+}
+
+/* Remove footer from left panel */
+.footer-links {
+    display: none;
+}

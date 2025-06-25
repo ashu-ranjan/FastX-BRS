@@ -7,7 +7,6 @@ import com.backend.fastx.exception.ResourceNotFoundException;
 import com.backend.fastx.model.*;
 import com.backend.fastx.repository.*;
 import com.backend.fastx.utility.FareUtility;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,11 +17,26 @@ import java.util.List;
 @Service
 public class BookingService {
 
-    @Autowired private BookingRepository bookingRepository;
-    @Autowired private ScheduleRepository scheduleRepository;
-    @Autowired private CustomerRepository customerRepository;
-    @Autowired private SeatRepository seatRepository;
-    @Autowired private BookingDetailsRepository bookingDetailsRepository;
+    private final BookingRepository bookingRepository;
+    private final ScheduleRepository scheduleRepository;
+    private final CustomerRepository customerRepository;
+    private final SeatRepository seatRepository;
+    private final BookingDetailsRepository bookingDetailsRepository;
+    private final UserRepository userRepository;
+
+    public BookingService(BookingRepository bookingRepository,
+                          ScheduleRepository scheduleRepository,
+                          CustomerRepository customerRepository,
+                          SeatRepository seatRepository,
+                          BookingDetailsRepository bookingDetailsRepository,
+                          UserRepository userRepository) {
+        this.bookingRepository = bookingRepository;
+        this.scheduleRepository = scheduleRepository;
+        this.customerRepository = customerRepository;
+        this.seatRepository = seatRepository;
+        this.bookingDetailsRepository = bookingDetailsRepository;
+        this.userRepository = userRepository;
+    }
 
     @Transactional
     public Booking createBooking(BookingRequestDTO bookingRequestDTO) {
@@ -83,5 +97,19 @@ public class BookingService {
 
         return bookingRepository.save(savedBooking);
 
+    }
+
+    public List<Booking> getBookingsByCustomerEmail(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found."));
+
+        Customer customer = customerRepository.findByUser(user)
+                .orElseThrow(()-> new ResourceNotFoundException("Customer not found."));
+        return bookingRepository.findByCustomer(customer);
+    }
+
+    public Booking getBookingByIdAndUsername(int id, String email) {
+        return bookingRepository.findByIdAndCustomerEmail(id, email)
+                .orElseThrow(() -> new ResourceNotFoundException("Booking not found or access denied"));
     }
 }

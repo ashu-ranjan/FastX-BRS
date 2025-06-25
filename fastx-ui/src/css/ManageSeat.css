@@ -1,0 +1,45 @@
+.seat-management-wrapper {
+  padding: 40px;
+  min-height: 100vh;
+  background: linear-gradient(to right, #ece9e6, #ffffff);
+  border-radius: 12px;
+}
+
+.seat-management {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.seat-management h2 {
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #333;
+}
+.seat-management table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.seat-management th, .seat-management td {
+  padding: 12px;
+  text-align: center;
+  
+}
+.seat-management th {
+  background-color: #f2f2f2;
+  color: #555;
+  font-weight: 600;
+  border-bottom: 2px solid #ddd;
+}
+.seat-management-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  font-size: xx-large;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+}

@@ -5,8 +5,6 @@ import com.backend.fastx.dto.CancellationApprovalDTO;
 import com.backend.fastx.service.CancellationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -14,11 +12,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/fastx/api/cancellation")
 public class CancellationController {
 
     @Autowired private CancellationService cancellationService;
 
-    @PostMapping("/fastx/api/cancellation/request")
+    @PostMapping("/request")
     public ResponseEntity<?> cancelPassenger(@RequestParam int bookingDetailId,
                                              @RequestBody CancelBookingRequestDTO requestDTO,
                                              Principal principal){
@@ -29,12 +28,24 @@ public class CancellationController {
         return ResponseEntity.ok(response);
 
     }
-    @PutMapping("/fastx/api/cancellation/approval")
+    @PutMapping("/approval")
     public ResponseEntity<?> approveCancellation(@RequestBody CancellationApprovalDTO dto,
-                                                      @AuthenticationPrincipal UserDetails userDetails) {
-        cancellationService.approveCancellation(dto, userDetails.getUsername());
+                                                 Principal principal) {
+        String username = principal.getName();
+        cancellationService.approveCancellation(dto, username);
         Map<String, String> response = new HashMap<>();
         response.put("message", "Cancellation processed successfully.");
         return ResponseEntity.ok(response);
+    }
+
+    // Get all requested (PENDING) cancellations
+    @GetMapping("/get-all/pending")
+    public ResponseEntity<?> getPendingCancellations(){
+        return ResponseEntity.ok(cancellationService.getRequestedCancellation());
+    }
+
+    @GetMapping("/history")
+    public ResponseEntity<?> getAllCancellation(){
+        return ResponseEntity.ok(cancellationService.getCancellationHistory());
     }
 }

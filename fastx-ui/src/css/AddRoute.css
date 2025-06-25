@@ -1,0 +1,113 @@
+.add-route-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #f8f9fa, #e9ecef);
+  padding: 40px;
+  box-sizing: border-box; /* ensures padding is included in width */
+  border-radius: 6px;
+  width: 100vw;
+}
+
+.form-card {
+  background-color: white;
+  padding: 2rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  width: 44vw;
+  
+}
+
+.form-title {
+  font-size: 1.6rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  text-align: left;
+  margin-bottom: 1.5rem;
+  color: #343a40;
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 1.25rem;
+}
+
+.form-group input {
+  width: 100%;
+  min-width: 0; /* prevent shrink */
+  padding: 10px 12px 10px 38px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: 0.3s;
+  box-sizing: border-box; /* ensures padding doesn't overflow */
+}
+
+
+.form-group input:focus {
+  outline: none;
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
+}
+
+.form-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+  font-size: 1rem;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 10px 15px;
+  background-color: #198754;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: 0.3s;
+  font-weight: 500;
+}
+
+.submit-btn:hover {
+  background-color: #157347;
+  cursor: pointer;
+}
+
+.input-with-icon {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.input-with-icon .form-icon {
+  position: absolute;
+  left: 12px;
+  pointer-events: none;
+}
+
+.input-with-icon input {
+  width: 100%;
+  padding-left: 38px;
+}
+.input-with-icon input:focus {
+  padding-left: 38px; /* Maintain padding when focused */
+}
+
+.form-group input[type="number"] {
+  width: 100%;
+  box-sizing: border-box; /* Ensures padding doesn't overflow */
+  padding: 10px 12px 10px 38px;
+  font-size: 0.95rem;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+}
+
+/* Optional: remove spinner for cleaner look */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

@@ -9,9 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/fastx/api/user")
+@CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
 
     @Autowired
@@ -25,11 +28,11 @@ public class UserController {
      * PARAM: @RequestBody User user
      * Response: User
      * METHOD: POST
-     * */
+     */
     @PostMapping("/register")
-    public User register(@RequestBody User user){
+    public User register(@RequestBody User user) {
         String email = user.getUsername();
-        return userService.register(user,email);
+        return userService.register(user, email);
     }
 
     /*
@@ -38,15 +41,28 @@ public class UserController {
      * PARAM: Principal principal
      * Response: Responsive<?>
      * METHOD: GET
-     * */
+     */
 
     @GetMapping("/token")
-    public ResponseEntity<?> getToken(Principal principal){
+    public ResponseEntity<?> getToken(Principal principal) {
         try {
             String token = jwtUtility.createToken(principal.getName());
-            return ResponseEntity.status(HttpStatus.OK).body(token);
-        }catch (Exception e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("token", token);
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         }
+    }
+
+    @GetMapping("/details")
+    public Object getLoggedInUserDetails(Principal principal) {
+        String username = principal.getName();// logged In username
+        Object userInfo = userService.getUserInfo(username);
+        if (userInfo == null)
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("error", "User not found or role is invalid"));
+        return ResponseEntity.ok(userInfo);
     }
 }

@@ -24,6 +24,9 @@ public class Customer {
     @Column(length = 1000)
     private String address;
 
+    @Column(name = "profile_pic")
+    private String profilePic;
+
     @OneToOne
     private User user;
 
@@ -81,5 +84,11 @@ public class Customer {
 
     public void setUser(User user) {
         this.user = user;
+    }
+    public String getProfilePic() {
+        return profilePic;
+    }
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
     }
 }

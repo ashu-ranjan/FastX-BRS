@@ -6,7 +6,6 @@ import com.backend.fastx.model.Customer;
 import com.backend.fastx.model.User;
 import com.backend.fastx.repository.CustomerRepository;
 import com.backend.fastx.utility.CustomerUtility;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,7 +15,6 @@ public class CustomerService {
     private final CustomerUtility customerUtility;
     private final UserService userService;
 
-    @Autowired
     public CustomerService(CustomerRepository customerRepository, CustomerUtility customerUtility, UserService userService) {
         this.customerRepository = customerRepository;
         this.customerUtility = customerUtility;

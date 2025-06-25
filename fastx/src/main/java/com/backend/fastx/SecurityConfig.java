@@ -3,6 +3,7 @@ package com.backend.fastx;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -24,6 +25,7 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         // Customer
                         .requestMatchers("/fastx/api/customer/add").permitAll()
                         // Operator
@@ -33,24 +35,40 @@ public class SecurityConfig {
                         // User
                         .requestMatchers("/fastx/api/user/register").permitAll()
                         .requestMatchers("/fastx/api/user/token").permitAll()
+                        .requestMatchers("/fastx/api/user/details").permitAll()
                         // Bus
                         .requestMatchers("/fastx/api/bus/add").hasAuthority("OPERATOR")
+                        .requestMatchers("/fastx/api/bus/get-buses").hasAuthority("OPERATOR")
+                        .requestMatchers("/fastx/api/bus/get-bus-type").hasAnyAuthority("OPERATOR", "EXECUTIVE")
+                        .requestMatchers("/fastx/api/bus/add-amenities").hasAnyAuthority("OPERATOR", "EXECUTIVE")
+                        .requestMatchers("/fastx/api/bus/get-amenities").permitAll()
                         // Seat
-                        .requestMatchers("/fastx/add/seat/{busId}").hasAuthority("OPERATOR")
-                        .requestMatchers("/fastx/get/seat").hasAuthority("CUSTOMER")
+                        .requestMatchers("/fastx/api/add/seat/{busId}").hasAuthority("OPERATOR")
+                        .requestMatchers("/fastx/api/get/seat").hasAuthority("CUSTOMER")
+                        .requestMatchers("/fastx/api/get/seats/bus/{busId}").permitAll()
+                        .requestMatchers("/fastx/api/update/seat/{seatId}").hasAnyAuthority("OPERATOR","EXECUTIVE")
                         // Bus Route
-                        .requestMatchers("/fastx/api/bus-route/add").permitAll()
+                        .requestMatchers("/fastx/api/bus-route/add").hasAnyAuthority("OPERATOR","EXECUTIVE")
+                        .requestMatchers("/fastx/api/bus-route/get-all").hasAnyAuthority("OPERATOR","EXECUTIVE")
                         // Schedule
                         .requestMatchers("/fastx/api/schedules/create/bus/{busId}/route/{routeId}").hasAnyAuthority("OPERATOR","EXECUTIVE")
                         .requestMatchers("/fastx/api/schedules/all").permitAll()
                         .requestMatchers("/fastx/api/schedules/id/{id}").permitAll()
                         .requestMatchers("/fastx/api/schedules/search").hasAuthority("CUSTOMER")
                         // Booking
-                        .requestMatchers("/fastx/api/book").permitAll()
+                        .requestMatchers("/fastx/api/book").hasAuthority("CUSTOMER")
                         .requestMatchers("/fastx/api/payment/make-payment").hasAuthority("CUSTOMER")
+                        .requestMatchers("/fastx/api/booking/history").hasAuthority("CUSTOMER")
+                        .requestMatchers("/fastx/api/bookings/{id}").hasAuthority("EXECUTIVE")
                         // Cancellation
                         .requestMatchers("/fastx/api/cancellation/request").hasAuthority("CUSTOMER")
-                        .requestMatchers("/fastx/api/cancellation/approval").hasAnyAuthority("EXECUTIVE")
+                        .requestMatchers("/fastx/api/cancellation/approval").hasAuthority("EXECUTIVE")
+                        .requestMatchers("/fastx/api/cancellation/get-all/pending").hasAuthority("EXECUTIVE")
+                        .requestMatchers("/fastx/api/cancellation/history").hasAuthority("EXECUTIVE")
+                        // Feedback
+                        .requestMatchers("/fastx/api/feedback/submit").hasAuthority("CUSTOMER")
+                        .requestMatchers("/fastx/api/feedback/get/by-operator").hasAuthority("OPERATOR")
+                        .requestMatchers("/fastx/api/feedback/bus/{busId}").hasAuthority("CUSTOMER")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)

@@ -2,7 +2,6 @@ package com.backend.fastx.controller;
 
 import com.backend.fastx.dto.PaymentRequestDTO;
 import com.backend.fastx.dto.PaymentResponseDTO;
-import com.backend.fastx.model.Payment;
 import com.backend.fastx.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

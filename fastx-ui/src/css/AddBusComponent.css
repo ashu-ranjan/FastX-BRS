@@ -1,0 +1,112 @@
+/* Main container - Centered and professional */
+.add-bus-container {
+  max-width: 800px; /* Optimal width for forms */
+  margin: 50px auto; /* Centers horizontally */
+  padding: 30px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+/* Form grid layout - 2 columns */
+.add-bus-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+
+
+.add-bus-container h3 {
+  font-size: 30px;
+  font-style: bold;
+  font-weight: 650;
+  color: #1a237e !important; /* Enforce the color */
+  margin-bottom: 20px;
+  text-align: left !important;
+  border-left: 5px solid #0d6efd;
+  padding-left: 10px;
+}
+
+/* Form Controls - Consistent styling */
+.add-bus-container .form-control,
+.add-bus-container .form-select,
+.add-bus-container .p-multiselect {
+  width: 100%;
+  border-radius: 8px;
+  padding: 12px 15px;
+  border: 1px solid #e0e0e0;
+  background-color: #f9f9f9;
+  transition: all 0.3s ease;
+}
+
+/* Focus states */
+.add-bus-container .form-control:focus,
+.add-bus-container .form-select:focus,
+.add-bus-container .p-multiselect:focus-within {
+  border-color: #4361ee;
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+  background-color: white;
+}
+
+/* Title styling */
+.add-bus-container h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 30px;
+  text-align: center;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+/* Button styling */
+.add-bus-container .btn-primary {
+  width: 100%;
+  padding: 12px;
+  background-color: #4361ee;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.add-bus-container .btn-primary:hover {
+  background-color: #3a56d4;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(67, 97, 238, 0.25);
+}
+
+/* Checkbox/amenities styling */
+.amenities-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .add-bus-form {
+    grid-template-columns: 1fr;
+  }
+  
+  .add-bus-container {
+    margin: 30px 20px;
+    padding: 20px;
+  }
+}
+
+/* Special styling for PrimeReact multiselect */
+.p-multiselect {
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+}
+
+.p-multiselect-panel {
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}

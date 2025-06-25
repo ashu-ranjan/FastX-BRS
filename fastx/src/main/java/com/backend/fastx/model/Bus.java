@@ -26,6 +26,8 @@ public class Bus {
     @Column(length = 1000)
     private String amenities;
 
+    private String imageUrl;
+
     @ManyToOne
     private BusOperator busOperator;
 
@@ -84,5 +86,12 @@ public class Bus {
 
     public void setBusOperator(BusOperator busOperator) {
         this.busOperator = busOperator;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

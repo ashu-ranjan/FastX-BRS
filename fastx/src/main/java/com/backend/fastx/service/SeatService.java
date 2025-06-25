@@ -1,17 +1,16 @@
 package com.backend.fastx.service;
 
+import com.backend.fastx.dto.SeatDTO;
 import com.backend.fastx.dto.SeatResponseDTO;
 import com.backend.fastx.exception.ResourceNotFoundException;
 import com.backend.fastx.exception.UnauthorizedBusAccessException;
 import com.backend.fastx.model.Bus;
-import com.backend.fastx.model.BusOperator;
 import com.backend.fastx.model.Schedule;
 import com.backend.fastx.model.Seat;
 import com.backend.fastx.repository.BusOperatorRepository;
 import com.backend.fastx.repository.BusRepository;
 import com.backend.fastx.repository.ScheduleRepository;
 import com.backend.fastx.repository.SeatRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +23,6 @@ public class SeatService {
     private final SeatRepository seatRepository;
     private final ScheduleRepository scheduleRepository;
 
-    @Autowired
     public SeatService(BusRepository busRepository, SeatRepository seatRepository, BusOperatorRepository busOperatorRepository, ScheduleRepository scheduleRepository) {
         this.busRepository = busRepository;
         this.seatRepository = seatRepository;
@@ -59,6 +57,29 @@ public class SeatService {
                 seat.getSeatType(),
                 seat.isActive()
         )).collect(Collectors.toList());
+    }
+
+    public List<Seat> getSeatsByBusId(int busId) {
+        List<Seat> seats = seatRepository.findByBusId(busId);
+        if (seats.isEmpty()) {
+            throw new ResourceNotFoundException("No seats found for bus with ID: " + busId);
+        }
+        return seats;
+    }
+
+    public SeatDTO updateSeat(int seatId, SeatDTO seatDTO, String username) {
+        Seat seat = seatRepository.findById(seatId)
+                .orElseThrow(() -> new ResourceNotFoundException("Seat not found with ID: " + seatId));
+
+        // Checking the bus belongs to the logged in operator
+        if (!seat.getBus().getBusOperator().getUser().getUsername().equalsIgnoreCase(username)) {
+            throw new UnauthorizedBusAccessException("You are not authorized to modify this seat");
+        }
+
+        // Update the seat's active status
+        seat.setActive(seatDTO.isActive());
+        seat.setPrice(seatDTO.getPrice());
+        return new SeatDTO(seatRepository.save(seat));
     }
 
 }

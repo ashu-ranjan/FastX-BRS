@@ -5,7 +5,6 @@ import com.backend.fastx.model.BusOperator;
 import com.backend.fastx.model.User;
 import com.backend.fastx.repository.BusOperatorRepository;
 import com.backend.fastx.utility.BusOperatorUtility;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,7 +14,6 @@ public class BusOperatorService {
     private final BusOperatorUtility busOperatorUtility;
     private final UserService userService;
 
-    @Autowired
     public BusOperatorService(BusOperatorRepository busOperatorRepository, BusOperatorUtility busOperatorUtility, UserService userService) {
         this.busOperatorRepository = busOperatorRepository;
         this.busOperatorUtility = busOperatorUtility;

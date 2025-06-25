@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
+import com.backend.fastx.enums.FeedbackStatus;
+
 @Entity
 @Table(name = "feedback")
 public class Feedback {
@@ -12,7 +14,9 @@ public class Feedback {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private int rating;
+    @Column(name = "feedback_status")
+    private FeedbackStatus feedbackStatus;
+    
     private String comment;
 
     @Column(name = "feedback_date")
@@ -29,13 +33,7 @@ public class Feedback {
         this.id = id;
     }
 
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
+    
 
     public String getComment() {
         return comment;
@@ -59,6 +57,14 @@ public class Feedback {
 
     public void setBooking(Booking booking) {
         this.booking = booking;
+    }
+
+    public FeedbackStatus getFeedbackStatus() {
+        return feedbackStatus;
+    }
+
+    public void setFeedbackStatus(FeedbackStatus feedbackStatus) {
+        this.feedbackStatus = feedbackStatus;
     }
 
 }

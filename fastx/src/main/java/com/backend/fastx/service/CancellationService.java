@@ -1,6 +1,7 @@
 package com.backend.fastx.service;
 
 import com.backend.fastx.dto.CancelBookingRequestDTO;
+import com.backend.fastx.dto.CancelRequestDTO;
 import com.backend.fastx.dto.CancellationApprovalDTO;
 import com.backend.fastx.enums.BookingStatus;
 import com.backend.fastx.enums.RefundStatus;
@@ -12,11 +13,11 @@ import com.backend.fastx.exception.UserAccessDeniedException;
 import com.backend.fastx.model.*;
 import com.backend.fastx.repository.*;
 import com.backend.fastx.utility.CancellationUtility;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CancellationService {
@@ -27,7 +28,7 @@ public class CancellationService {
     private final UserRepository userRepository;
     private final BusRepository busRepository;
 
-    @Autowired
+
     public CancellationService(BookingDetailsRepository bookingDetailsRepository, CancellationRepository cancellationRepository, SeatRepository seatRepository, UserRepository userRepository, BusRepository busRepository) {
         this.bookingDetailsRepository = bookingDetailsRepository;
         this.cancellationRepository = cancellationRepository;
@@ -81,6 +82,7 @@ public class CancellationService {
     }
 
     public void approveCancellation(CancellationApprovalDTO approvalDTO, String username) {
+        
         Cancellation cancellation = cancellationRepository.findById(approvalDTO.getCancellationId())
                 .orElseThrow(() -> new ResourceNotFoundException("Cancellation not found"));
 
@@ -129,5 +131,39 @@ public class CancellationService {
         cancellation.setRefundStatus(approvalDTO.getRefundStatus());
         cancellation.setReason(approvalDTO.getRemarks());
         cancellationRepository.save(cancellation);
+    }
+
+    public List<CancelRequestDTO> getRequestedCancellation(){
+        return cancellationRepository.findByRefundStatus(RefundStatus.REQUESTED)
+                .stream()
+                .map(this::buildDTO)
+                .collect(Collectors.toList());
+
+    }
+
+    public List<CancelRequestDTO> getCancellationHistory() {
+        return cancellationRepository
+                .findAll()
+                .stream()
+                .map(this::buildDTO)
+                .collect(Collectors.toList());
+    }
+
+    // CancelRequestDTO build method
+    private CancelRequestDTO buildDTO(Cancellation cancellation) {
+        BookingDetails details = cancellation.getBookingDetails();
+        Booking booking = details.getBooking();
+        Customer customer = booking.getCustomer();
+
+        return new CancelRequestDTO(
+                cancellation.getId(),
+                cancellation.getReason(),
+                cancellation.getRefundStatus().name(),
+                booking.getId(),
+                details.getId(),
+                details.getPassenger(),
+                customer.getName(),
+                customer.getEmail()
+        );
     }
 }
