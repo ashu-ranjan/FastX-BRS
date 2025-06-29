@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import '../../css/AddSeat.css'; // Include this
+import '../Operator/css/AddSeat.css'; // Include this
 import { FaChair } from "react-icons/fa";
 
 function AddSeat() {

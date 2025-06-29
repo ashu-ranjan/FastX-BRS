@@ -13,18 +13,22 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/fastx/api/schedules")
+@CrossOrigin(origins = "http://localhost:5173") // Adjust the origin as needed
 public class ScheduleController {
 
     @Autowired
     private ScheduleService scheduleService;
 
-    /*
-     * AIM: Adding Schedule to db
-     * PATH: /fastx/api/schedules/create
-     * METHOD: POST
-     * RESPONSE: Schedule
-     * Authority: OPERATOR, EXECUTIVE
-     * */
+    /**
+     * @aim Create a new schedule
+     * @description This method allows an operator to create a new schedule for a bus on a specific route.
+     * @path /fastx/api/schedules/create/bus/{busId}/route/{routeId}
+     * @method POST
+     * @param schedule The schedule details to be created.
+     * @param busId The ID of the bus for which the schedule is being created.
+     * @param routeId The ID of the route for which the schedule is being created.
+     * @return ResponseEntity containing the created schedule.
+     */
     @PostMapping("/create/bus/{busId}/route/{routeId}")
     public ResponseEntity<?> createSchedule(@RequestBody Schedule schedule,
                                             @PathVariable int busId,
@@ -34,13 +38,16 @@ public class ScheduleController {
                 .body(scheduleService.createSchedule(schedule, busId, routeId));
     }
 
-    /*
-     * AIM: Search buses
-     * PATH: /fastx/search
-     * METHOD: GET
-     * RESPONSE: List<Schedule>
-     * Authority: CUSTOMER
-     * */
+    /**
+     * @aim Get schedule by route and date
+     * @description This method retrieves the bus schedule for a specific route and date.
+     * @path /fastx/api/schedules/search
+     * @method GET
+     * @param origin The origin location for the bus schedule.
+     * @param destination The destination location for the bus schedule.
+     * @param date The date for which the bus schedule is being requested.
+     * @return ResponseEntity containing the bus schedule for the specified route and date.
+     */
 
     @GetMapping("/search")
     public ResponseEntity<?> getScheduleByRouteAndDate(@RequestParam String origin,
@@ -50,13 +57,13 @@ public class ScheduleController {
         return ResponseEntity.ok(response);
     }
 
-    /*
-     * AIM: Getting all Schedule
-     * PATH: /fastx/api/schedules/all
-     * METHOD: GET
-     * RESPONSE: List<Schedule>
-     * Authority: OPERATOR, EXECUTIVE
-     * */
+    /**
+     * @aim Get all schedules
+     * @description This method retrieves all bus schedules available in the system.
+     * @path /fastx/api/schedules/all
+     * @method GET
+     * @return ResponseEntity containing the list of all bus schedules.
+     */
     @GetMapping("/all")
     public ResponseEntity<?> getAllSchedules(){
         return ResponseEntity
@@ -64,13 +71,14 @@ public class ScheduleController {
                 .body(scheduleService.getAllSchedules());
     }
 
-    /*
-     * AIM: Getting Schedule by ID
-     * PATH: /fastx/api/schedules/id/{id}
-     * METHOD: GET
-     * RESPONSE: Schedule
-     * Authority: OPERATOR, EXECUTIVE
-     * */
+    /**
+     * @aim Get schedule by ID
+     * @description This method retrieves a bus schedule by its unique ID.
+     * @path /fastx/api/schedules/id/{id}
+     * @method GET
+     * @param id The unique identifier of the bus schedule.
+     * @return ResponseEntity containing the bus schedule with the specified ID.
+     */
     @GetMapping("/id/{id}")
     public ResponseEntity<?> getScheduleById(@PathVariable int id){
         return ResponseEntity
@@ -78,13 +86,17 @@ public class ScheduleController {
                 .body(scheduleService.getScheduleById(id));
     }
 
-    /*
-     * AIM: Delete Schedule by ID
-     * PATH: /fastx/api/schedules/delete/{id}
-     * METHOD: DELETE
-     * RESPONSE: void
-     * Authority: EXECUTIVE
-     * */
+    /**
+     * @aim get schedule by bus id
+     * @path /fastx/api/schedules/bus/{busId}
+     * @method GET
+     * @return ResponseEntity<Schedule>
+     */
+    @GetMapping("/bus/{busId}")
+    public ResponseEntity<?> getScheduleByBusId(@PathVariable int busId){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(scheduleService.getScheduleByBusId(busId));
+    }
 
-    // To do...
 }

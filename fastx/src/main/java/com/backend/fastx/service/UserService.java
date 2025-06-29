@@ -29,6 +29,14 @@ public class UserService {
         this.executiveRepository = executiveRepository;
     }
 
+    /**
+     * Registers a new user by setting the username as email and encoding the password.
+     *
+     * @param user  The User object containing user details.
+     * @param email The email to be used as the username.
+     * @return The saved User object with encoded password.
+     */
+
     public User register(User user, String email) {
 
         // Set username as email for all users
@@ -42,6 +50,13 @@ public class UserService {
         // save user to DB
         return userRepository.save(user);
     }
+
+    /**
+     * Retrieves user information based on the username.
+     *
+     * @param username The username of the user whose information is to be retrieved.
+     * @return An object containing user information, or null if the user does not exist.
+     */
 
     public Object getUserInfo(String username) {
         Optional<User> userOptional = userRepository.findByUsername(username);

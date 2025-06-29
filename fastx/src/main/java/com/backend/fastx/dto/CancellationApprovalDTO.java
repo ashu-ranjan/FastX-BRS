@@ -7,6 +7,10 @@ public class CancellationApprovalDTO {
     private RefundStatus refundStatus; // Only APPROVED or REJECTED
     private String remarks;
 
+    public CancellationApprovalDTO() {
+        // Default constructor
+    }
+
     public CancellationApprovalDTO(int cancellationId, RefundStatus refundStatus, String remarks) {
         this.cancellationId = cancellationId;
         this.refundStatus = refundStatus;

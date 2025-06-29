@@ -29,6 +29,16 @@ public class SeatService {
         this.scheduleRepository = scheduleRepository;
     }
 
+    /**
+     * Adds a new seat to a bus.
+     *
+     * @param busId   The ID of the bus to which the seat is being added.
+     * @param seat    The Seat object containing seat details.
+     * @param username The username of the logged-in operator.
+     * @return The saved Seat object.
+     * @throws IllegalAccessException if the bus does not belong to the logged-in operator.
+     */
+
     public Seat addSeatToBus(int busId, Seat seat, String username) throws IllegalAccessException {
         Bus bus = busRepository.findById(busId)
                 .orElseThrow(()-> new ResourceNotFoundException("Bus not found with ID" + busId));
@@ -42,6 +52,13 @@ public class SeatService {
         seat.setActive(true); // default true
         return seatRepository.save(seat);
     }
+
+    /**
+     * Retrieves a list of available seats for a specific bus schedule.
+     *
+     * @param scheduleId The ID of the bus schedule for which available seats are requested.
+     * @return A list of SeatResponseDTO containing details of available seats.
+     */
 
     public List<SeatResponseDTO> getAvailableSeatsForSchedule(int scheduleId) {
         Schedule schedule = scheduleRepository.findById(scheduleId)
@@ -59,6 +76,14 @@ public class SeatService {
         )).collect(Collectors.toList());
     }
 
+    /**
+     * Retrieves a list of seats for a specific bus.
+     *
+     * @param busId The ID of the bus for which seats are requested.
+     * @return A list of Seat objects associated with the given bus ID.
+     * @throws ResourceNotFoundException if no seats are found for the specified bus ID.
+     */
+
     public List<Seat> getSeatsByBusId(int busId) {
         List<Seat> seats = seatRepository.findByBusId(busId);
         if (seats.isEmpty()) {
@@ -66,6 +91,17 @@ public class SeatService {
         }
         return seats;
     }
+
+    /**
+     * Updates the status of a seat.
+     *
+     * @param seatId   The ID of the seat to be updated.
+     * @param seatDTO  The SeatDTO object containing updated seat details.
+     * @param username The username of the logged-in operator.
+     * @return The updated SeatDTO object.
+     * @throws ResourceNotFoundException if the seat is not found with the specified ID.
+     * @throws UnauthorizedBusAccessException if the bus does not belong to the logged-in operator.
+     */
 
     public SeatDTO updateSeat(int seatId, SeatDTO seatDTO, String username) {
         Seat seat = seatRepository.findById(seatId)

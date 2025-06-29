@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { FaBusAlt, FaChartBar, FaClipboardList, FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import '../../css/Dashboard.css';
+import '../Operator/css/Dashboard.css';
 
 function Dashboard() {
   const [buses, setBuses] = useState([]);
@@ -51,7 +51,7 @@ function Dashboard() {
                 <p className="bus-type">
                   {bus.busType?.replace(/_/g, ' ').toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase()) || "Unknown Type"}
                 </p>
-                <Link to={`/operator/bus/details/${bus.id}`} className="view-details-btn">
+                <Link to={`/operator/bus-details/${bus.id}`} className="view-details-btn">
                   View Details
                 </Link>
               </div>
@@ -59,6 +59,10 @@ function Dashboard() {
           )) : (
             <div className="no-buses-message">
               <p>No buses found in your fleet yet.</p>
+              <Link className="nav-bus d-flex align-items-center gap-2 me-3" to="/operator/add-bus" style={{ width: '10%', marginLeft: '520px' }}>
+                <span className="name">Add Bus</span>
+                <i className="fas fa-bus"></i>
+              </Link>
             </div>
           )}
         </div>
@@ -190,15 +194,15 @@ function Dashboard() {
           </div>
           {/* Social Media Links */}
           <div className="footer-social">
-            <a href="#" className="social-link"><FaFacebook /></a>
-            <a href="#" className="social-link"><FaTwitter /></a>
-            <a href="#" className="social-link"><FaInstagram /></a>
-            <a href="#" className="social-link"><FaLinkedin /></a>
+            <Link to="#" className="social-link"><FaFacebook /></Link>
+            <Link to="#" className="social-link"><FaTwitter /></Link>
+            <Link to="#" className="social-link"><FaInstagram /></Link>
+            <Link to="#" className="social-link"><FaLinkedin /></Link>
           </div>
           <div className="legal-links">
-            <a href="#">Terms</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Support</a>
+            <Link to="#">Terms</Link>
+            <Link to="#">Privacy Policy</Link>
+            <Link to="#">Support</Link>
           </div>
         </div>
       </footer>

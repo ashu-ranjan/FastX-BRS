@@ -3,6 +3,9 @@ package com.backend.fastx.repository;
 import com.backend.fastx.model.Booking;
 import com.backend.fastx.model.Bus;
 import com.backend.fastx.model.Customer;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -16,4 +19,6 @@ public interface BookingRepository extends JpaRepository<Booking, Integer> {
     Optional<Booking> findByIdAndCustomerEmail(int id, String username);
 
     List<Booking> findByScheduleBusIn(List<Bus> buses);
+
+    Page<Booking> findByCustomer(Customer customer, Pageable pageable);
 }

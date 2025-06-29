@@ -13,4 +13,6 @@ public interface BusOperatorRepository extends JpaRepository<BusOperator, Intege
 
     @Query("SELECT bo FROM BusOperator bo WHERE bo.user.username = ?1")
     Optional<BusOperator> getBusOperatorByUsername(String username);
+
+    Optional<BusOperator> findByEmail(String email);
 }

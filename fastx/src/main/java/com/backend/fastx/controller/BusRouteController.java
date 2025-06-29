@@ -25,15 +25,15 @@ public class BusRouteController {
     @Autowired
     private BusRouteService busRouteService;
 
-    /*
-     * AIM: adding Bus Route to db
-     * PATH: /fastx/api/bus-route/add
-     * METHOD: POST
-     * RESPONSE: BusRoute
-     * AUTHORITY: EXECUTIVE only can add routes on which buses will operate
-     * */
-
-    /* **** For now i am granting all to add route **** */
+    /**
+     * @aim Add a new bus route
+     * @path /fastx/api/bus-route/add
+     * @method POST
+     * @description This method will add a new bus route to the system.
+     *              It requires the bus route details in the request body.
+     * @param busRoute
+     * @return ResponseEntity<BusRoute>
+     */
 
     @PostMapping("/add")
     public ResponseEntity<?> addRoute(@RequestBody BusRoute busRoute){
@@ -43,13 +43,14 @@ public class BusRouteController {
                 .body(busRoute);
     }
 
-    /*
-     * AIM: Get all bus routes
-     * PATH: /fastx/api/bus-route/get-all
-     * METHOD: GET  
-     * RESPONSE: List<BusRoute>
-     * AUTHORITY: EXECUTIVE or OPERATOR can get routes on which buses will operate
-     * */
+    /**
+     * @aim Get all bus routes
+     * @description This method retrieves all bus routes from the system.
+     *              It returns a list of BusRoute objects.
+     * @path /fastx/api/bus-route/get-all
+     * @method GET
+     * @return ResponseEntity<List<BusRoute>>
+     */
 
      @GetMapping("/get-all")
      public ResponseEntity<List<BusRoute>> getAllRoutes() {

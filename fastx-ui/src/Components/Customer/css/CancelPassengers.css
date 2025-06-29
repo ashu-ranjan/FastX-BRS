@@ -1,0 +1,230 @@
+.cancel-passengers-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.passenger-list {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.passenger-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.passenger-item:last-child {
+    border-bottom: none;
+}
+
+.passenger-item label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.passenger-item input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.already-cancelled {
+    color: #888;
+    font-style: italic;
+    margin-left: 5px;
+}
+
+.reason-input {
+    margin: 20px 0;
+}
+
+.reason-input textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    min-height: 100px;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.action-buttons button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.action-buttons button[type="submit"] {
+    background-color: #dc3545;
+    color: white;
+}
+
+.action-buttons button[type="submit"]:disabled {
+    background-color: #ccc;
+}
+
+.error-message {
+    color: #dc3545;
+    margin: 10px 0;
+}
+.cancel-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.passenger-list {
+    margin: 20px 0;
+}
+
+.passenger-item {
+    padding: 10px;
+    margin: 5px 0;
+    background: #f5f5f5;
+    border-radius: 4px;
+}
+
+.reason-box textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    min-height: 100px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.buttons button {
+    padding: 8px 16px;
+}
+
+.error {
+    color: red;
+    margin: 10px 0;
+}
+
+
+.cancel-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.cancel-content {
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.passenger-selection {
+    margin: 20px 0;
+}
+
+.passenger-list {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.passenger-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.passenger-item:last-child {
+    border-bottom: none;
+}
+
+.passenger-item.cancelled {
+    opacity: 0.6;
+}
+
+.passenger-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.passenger-info .name {
+    flex: 1;
+}
+
+.passenger-info .seat {
+    color: #666;
+}
+
+.status-badge {
+    background-color: #f0f0f0;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    margin-left: 10px;
+}
+
+.reason-section {
+    margin: 20px 0;
+}
+
+.reason-section textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.back-btn {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+}
+
+.submit-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+}
+
+.error-message {
+    color: #e74c3c;
+    margin: 10px 0;
+}

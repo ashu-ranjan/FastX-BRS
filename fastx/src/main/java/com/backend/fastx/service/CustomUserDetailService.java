@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class CustomUserDetailService implements UserDetailsService {
+@Service // This annotation tells Spring to create an object of this class and use it wherever required
+public class CustomUserDetailService implements UserDetailsService { // This class implements UserDetailsService to provide user details for authentication
 
     @Autowired
     private UserRepository userRepository;
@@ -38,4 +38,13 @@ public class CustomUserDetailService implements UserDetailsService {
                                 list);
         return springUser;
     }
+
+    /**
+     * This method is used to load user details by username.
+     * It fetches the user from the database and converts it into Spring's UserDetails object.
+     * 
+     * this class is used by spring security to load the user details during authentication.
+     * It is automatically called by spring security when a user tries to authenticate.
+     * 
+     */
 }

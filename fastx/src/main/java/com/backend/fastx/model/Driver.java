@@ -18,6 +18,7 @@ public class Driver {
     private String name;
     private String contact;
     private String email;
+    private Integer experience;
 
     @Column(name = "license_number", unique = true)
     private String licenseNumber;
@@ -81,5 +82,11 @@ public class Driver {
     }
     public void setBus(Bus bus) {
         this.bus = bus;
+    }
+    public Integer getExperience() {
+        return experience;
+    }
+    public void setExperience(Integer experience) {
+        this.experience = experience;
     }
 }

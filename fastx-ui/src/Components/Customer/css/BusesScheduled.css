@@ -1,0 +1,143 @@
+/* BusesScheduled.css */
+.buses-page {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a2a6c, #3a7bd5, #00d2ff);
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buses-page h1 {
+  color: white;
+  font-size: 28px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.buses-page p {
+  color: rgba(255,255,255,0.9);
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+.bus-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  max-width: 900px; /* Reduced from 1000px */
+}
+
+.bus-card {
+  background-color: rgba(255, 255, 255, 0.97);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.bus-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.bus-name-type {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.bus-name-type h3 {
+  color: #2c3e50;
+  font-size: 18px;
+  margin: 0;
+  font-weight: 600;
+}
+
+.bus-name-type p {
+  color: white;
+  background: linear-gradient(to right, #3a7bd5, #00d2ff);
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.timing {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.timing div {
+  text-align: center;
+  flex: 1;
+}
+
+.timing p {
+  color: #2c3e50;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 5px 0;
+}
+
+.timing small {
+  color: #7f8c8d;
+  font-size: 12px;
+}
+
+.price-seats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 15px;
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.price-seats p {
+  color: #e74c3c;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.price-seats button {
+  background: linear-gradient(to right, #3a7bd5, #00d2ff);
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.price-seats button:hover {
+  transform: translateY(-2px);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .buses-page {
+    padding: 15px;
+  }
+  
+  .bus-list {
+    max-width: 100%;
+  }
+  
+  .bus-card {
+    padding: 15px;
+  }
+}

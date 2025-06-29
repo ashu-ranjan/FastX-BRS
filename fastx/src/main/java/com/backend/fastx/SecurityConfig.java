@@ -18,7 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     @Autowired
-    private JwtFilter jwtFilter;
+    private JwtFilter jwtFilter; // This is the filter that will intercept every request and check for JWT token
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -28,10 +28,20 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         // Customer
                         .requestMatchers("/fastx/api/customer/add").permitAll()
+                        .requestMatchers("/fastx/api/customer/update/profile").permitAll()
+                        .requestMatchers("/fastx/api/customer/get/profile").permitAll()
+                        .requestMatchers("/fastx/api/customer/upload/image").permitAll()
                         // Operator
                         .requestMatchers("/fastx/api/bus-operator/add").permitAll()
+                        .requestMatchers("null/fastx/api/bus-operator/update/profile").permitAll()
+                        .requestMatchers("/fastx/api/bus-operator/upload/image").permitAll()
+                        .requestMatchers("/fastx/api/bus-operator/get/profile").permitAll()
                         // Executive
                         .requestMatchers("/fastx/api/executive/add").permitAll()
+                        .requestMatchers("/fastx/api/executive/update/profile").permitAll()
+                        .requestMatchers("/fastx/api/executive/upload/image").permitAll()
+                        .requestMatchers("/fastx/api/executive/get/profile").permitAll()
+
                         // User
                         .requestMatchers("/fastx/api/user/register").permitAll()
                         .requestMatchers("/fastx/api/user/token").permitAll()
@@ -42,6 +52,14 @@ public class SecurityConfig {
                         .requestMatchers("/fastx/api/bus/get-bus-type").hasAnyAuthority("OPERATOR", "EXECUTIVE")
                         .requestMatchers("/fastx/api/bus/add-amenities").hasAnyAuthority("OPERATOR", "EXECUTIVE")
                         .requestMatchers("/fastx/api/bus/get-amenities").permitAll()
+                        .requestMatchers("/fastx/api/bus/update/{busId}").permitAll()
+                        // Driver
+                        .requestMatchers("/fastx/api/driver/add/{busId}").hasAuthority("OPERATOR")
+                        .requestMatchers("/fastx/api/driver/bus/{busId}").authenticated()
+                        .requestMatchers("/fastx/api/driver/update/{driverId}/bus/{busId}").hasAuthority("OPERATOR")
+                        .requestMatchers("/fastx/api/driver/delete/{driverId}/bus/{busId}").hasAuthority("OPERATOR")
+                        .requestMatchers("/fastx/api/driver/all").hasAuthority("OPERATOR")
+                        .requestMatchers("/fastx/api/driver/{driverId}").hasAuthority("OPERATOR")  
                         // Seat
                         .requestMatchers("/fastx/api/add/seat/{busId}").hasAuthority("OPERATOR")
                         .requestMatchers("/fastx/api/get/seat").hasAuthority("CUSTOMER")
@@ -54,14 +72,16 @@ public class SecurityConfig {
                         .requestMatchers("/fastx/api/schedules/create/bus/{busId}/route/{routeId}").hasAnyAuthority("OPERATOR","EXECUTIVE")
                         .requestMatchers("/fastx/api/schedules/all").permitAll()
                         .requestMatchers("/fastx/api/schedules/id/{id}").permitAll()
-                        .requestMatchers("/fastx/api/schedules/search").hasAuthority("CUSTOMER")
+                        .requestMatchers("/fastx/api/schedules/search").permitAll()
+                        .requestMatchers("/fastx/api/schedules/bus/{busId}").hasAuthority("OPERATOR")
                         // Booking
                         .requestMatchers("/fastx/api/book").hasAuthority("CUSTOMER")
                         .requestMatchers("/fastx/api/payment/make-payment").hasAuthority("CUSTOMER")
                         .requestMatchers("/fastx/api/booking/history").hasAuthority("CUSTOMER")
                         .requestMatchers("/fastx/api/bookings/{id}").hasAuthority("EXECUTIVE")
+                        .requestMatchers("/fastx/api/booking-details/by-bookingId/{bookingId}").hasAuthority("CUSTOMER")
                         // Cancellation
-                        .requestMatchers("/fastx/api/cancellation/request").hasAuthority("CUSTOMER")
+                        .requestMatchers("/fastx/api/cancellation/request/{bookingDetailId}").hasAuthority("CUSTOMER")
                         .requestMatchers("/fastx/api/cancellation/approval").hasAuthority("EXECUTIVE")
                         .requestMatchers("/fastx/api/cancellation/get-all/pending").hasAuthority("EXECUTIVE")
                         .requestMatchers("/fastx/api/cancellation/history").hasAuthority("EXECUTIVE")
@@ -72,7 +92,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                .httpBasic(Customizer.withDefaults());
+                .httpBasic(Customizer.withDefaults()); // Enable basic authentication
         return http.build();
     }
 
@@ -81,6 +101,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    // This bean is used to create an AuthenticationManager that is used by Spring Security to authenticate users
     @Bean
     AuthenticationManager authenticationManager(AuthenticationConfiguration auth) throws Exception {
         return auth.getAuthenticationManager();

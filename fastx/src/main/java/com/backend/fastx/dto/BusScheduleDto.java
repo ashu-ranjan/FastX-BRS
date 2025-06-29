@@ -5,6 +5,7 @@ import java.time.LocalTime;
 
 public class BusScheduleDto {
     private int scheduleId;
+    private int busId;
     private String busName;
     private String busType;
     private LocalTime departureTime;
@@ -12,8 +13,9 @@ public class BusScheduleDto {
     private Duration duration;
     private double fare;
 
-    public BusScheduleDto(int scheduleId, String busName, String busType, LocalTime departureTime, LocalTime arrivalTime,Duration duration, double fare) {
+    public BusScheduleDto(int scheduleId, int busId, String busName, String busType, LocalTime departureTime, LocalTime arrivalTime, Duration duration, double fare) {
         this.scheduleId = scheduleId;
+        this.busId = busId;
         this.busName = busName;
         this.busType = busType;
         this.departureTime = departureTime;
@@ -76,5 +78,11 @@ public class BusScheduleDto {
 
     public void setScheduleId(int scheduleId) {
         this.scheduleId = scheduleId;
+    }
+    public int getBusId() {
+        return busId;
+    }
+    public void setBusId(int busId) {
+        this.busId = busId;
     }
 }

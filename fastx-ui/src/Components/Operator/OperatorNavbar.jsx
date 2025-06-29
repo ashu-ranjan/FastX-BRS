@@ -1,16 +1,39 @@
-import { use } from 'react';
-import '../../css/OperatorNavbar.css';
+import { use, useEffect, useState } from 'react';
+import '../Operator/css/OperatorNavbar.css';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { FaUser } from 'react-icons/fa';
 
 function OperatorNavbar() {
 
     const navigate = useNavigate();
+    const [profilePic, setProfilePic] = useState('');
+    const [cacheBuster, setCacheBuster] = useState(Date.now());
     const logout = () => {
         localStorage.clear();
         // Redirect to login page after logout
         navigate("/");
     }
 
+    useEffect(() => {
+        const fetchProfile = async () => {
+            try {
+                const response = await axios.get(`http://localhost:8080/fastx/api/bus-operator/get/profile`, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    },
+                });
+                setProfilePic(response.data.profilePic);
+                setCacheBuster(Date.now());
+            } catch (error) {
+                console.error("Failed to fetch customer profile");
+            }
+        };
+
+        fetchProfile();
+    }, []);
+
+    const avatarUrl = profilePic ? `/images/${profilePic}?t=${cacheBuster}` : null;
 
     return (
         <div className='operator-navbar'>
@@ -36,11 +59,11 @@ function OperatorNavbar() {
                         {/* <!-- Navbar brand --> */}
                         <a className="navbar-brand mt-2 mt-lg-0" href="#" >
                             <img
-                                src="../../public/images/fxlogo.png"
+                                src="/images/fxlogo.png"
                                 height="20"
                                 alt="MDB Logo"
                                 loading="lazy"
-                                
+
                             />
                         </a>
                         {/* <!-- Left links --> */}
@@ -77,33 +100,9 @@ function OperatorNavbar() {
                             <i className="fas fa-bus"></i>
                         </Link>
 
-
-                        {/* Notifications Dropdown */}
-                        {/* <div className="dropdown">
-                            <a
-                                className="nav-notification d-flex align-items-center gap-2 me-3 position-relative dropdown-toggle"
-                                href="#"
-                                id="navbarDropdownMenuLink"
-                                role="button"
-                                data-mdb-toggle="dropdown"
-                                aria-expanded="false"
-                            >
-                                <span className="name">Notifications</span>
-                                <i className="fas fa-bell"></i>
-                                <span className="notification-badge">1</span>
-                            </a>
-                            <ul
-                                className="dropdown-menu dropdown-menu-end"
-                                aria-labelledby="navbarDropdownMenuLink"
-                            >
-                                <li><a className="dropdown-item" href="#">Some news</a></li>
-                                <li><a className="dropdown-item" href="#">Another news</a></li>
-                                <li><a className="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </div> */}
                         {/* <!-- Avatar --> */}
                         <div className="dropdown">
-                            <a
+                            <Link
                                 data-mdb-dropdown-init
                                 className="dropdown-toggle d-flex align-items-center hidden-arrow"
                                 href="#"
@@ -112,26 +111,31 @@ function OperatorNavbar() {
                                 data-mdb-toggle="dropdown"
                                 aria-expanded="false"
                             >
-                                <img
-                                    src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                                    className="rounded-circle"
-                                    height="25"
-                                    alt="Black and White Portrait of a Man"
-                                    loading="lazy"
-                                />
-                            </a>
+                                {avatarUrl ? (
+                                    <img
+                                        src={avatarUrl}
+                                        className="rounded-circle"
+                                        height="30"
+                                        width="30"
+                                        alt="Profile"
+                                        loading="lazy"
+                                    />
+                                ) : (
+                                    <FaUser size={24} className="text-secondary" />
+                                )}
+                            </Link>
                             <ul
                                 className="dropdown-menu dropdown-menu-end"
                                 aria-labelledby="navbarDropdownMenuAvatar"
                             >
                                 <li>
-                                    <a className="dropdown-item" href="#">My profile</a>
+                                    <Link className="dropdown-item" to="/operator/profile">My profile</Link>
                                 </li>
                                 <li>
-                                    <a className="dropdown-item" href="#">Settings</a>
+                                    <Link className="dropdown-item" to="/operator/profile">Settings</Link>
                                 </li>
                                 <li>
-                                    <Link className="dropdown-item" to="/" onClick={()=>logout()}>Logout</Link>
+                                    <Link className="dropdown-item" to="/" onClick={() => logout()}>Logout</Link>
                                 </li>
                             </ul>
                         </div>

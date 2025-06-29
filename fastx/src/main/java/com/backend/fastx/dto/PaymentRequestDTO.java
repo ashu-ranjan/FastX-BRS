@@ -7,6 +7,10 @@ public class PaymentRequestDTO {
     private PaymentMethod paymentMethod; // UPI, CARD, etc.
     private PaymentStatus paymentStatus; // PROCESSING or SUCCESS
 
+    public PaymentRequestDTO() {
+        // Default constructor
+    }
+
     public PaymentRequestDTO(PaymentMethod paymentMethod, PaymentStatus paymentStatus) {
         this.paymentMethod = paymentMethod;
         this.paymentStatus = paymentStatus;

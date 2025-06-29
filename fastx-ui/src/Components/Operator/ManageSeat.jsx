@@ -4,10 +4,9 @@ import axios from 'axios';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { Tag } from 'primereact/tag';
-import { Button } from 'primereact/button';
 import { InputNumber } from 'primereact/inputnumber';
 import { Dropdown } from 'primereact/dropdown';
-import '../../css/ManageSeat.css';
+import '../Operator/css/ManageSeat.css';
 import { FaChair } from 'react-icons/fa';
 
 function ManageSeat() {

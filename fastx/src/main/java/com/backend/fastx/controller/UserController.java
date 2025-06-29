@@ -22,12 +22,13 @@ public class UserController {
     @Autowired
     private JwtUtility jwtUtility;
 
-    /*
-     * AIM: insert the user in the DB with password encrypted.
-     * PATH: /fastx/api/user/register
-     * PARAM: @RequestBody User user
-     * Response: User
-     * METHOD: POST
+    /**
+     * @aim Register a new user
+     * @description This method allows a new user to register by providing their details.
+     * @path /fastx/api/user/register
+     * @method POST
+     * @param user The user object containing the registration details.
+     * @return User
      */
     @PostMapping("/register")
     public User register(@RequestBody User user) {
@@ -35,12 +36,13 @@ public class UserController {
         return userService.register(user, email);
     }
 
-    /*
-     * AIM: Getting token after logging in
-     * PATH: /fastx/api/user/token
-     * PARAM: Principal principal
-     * Response: Responsive<?>
-     * METHOD: GET
+    /**
+     * @aim Login a user
+     * @description This method allows a user to log in by providing their username and password.
+     * @path /fastx/api/user/login
+     * @method POST
+     * @param user The user object containing the login credentials.
+     * @return ResponseEntity containing the JWT token if login is successful.
      */
 
     @GetMapping("/token")
@@ -55,6 +57,14 @@ public class UserController {
         }
     }
 
+    /**
+     * @aim Get logged-in user details
+     * @description This method retrieves the details of the currently logged-in user.
+     * @path /fastx/api/user/details
+     * @method GET
+     * @param principal The principal object representing the authenticated user.
+     * @return ResponseEntity containing the user details or an error message if not found.
+     */
     @GetMapping("/details")
     public Object getLoggedInUserDetails(Principal principal) {
         String username = principal.getName();// logged In username

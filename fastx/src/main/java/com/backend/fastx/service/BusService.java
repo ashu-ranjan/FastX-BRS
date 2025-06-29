@@ -22,6 +22,15 @@ public class BusService {
         this.busOperatorRepository = busOperatorRepository;
     }
 
+    /**
+     * Adds a new bus for a given operator.
+     *
+     * @param bus      The bus object to be added.
+     * @param username The username of the bus operator.
+     * @return The added bus object.
+     * @throws ResourceNotFoundException if no operator is found for the given username.
+     */
+
     public Bus addBus(Bus bus, String username) {
 
         // Fetch operator by username (having one-to-one with User)
@@ -35,6 +44,14 @@ public class BusService {
         return busRepository.save(bus);
     }
 
+    /**
+     * Fetches all buses associated with a given operator.
+     *
+     * @param username The username of the bus operator.
+     * @return A list of buses associated with the operator.
+     * @throws ResourceNotFoundException if no operator is found for the given username.
+     */
+
     public List<Bus> getBusesByOperator(String username) {
         // Fetch operator by username
         BusOperator operator = busOperatorRepository.findByUserUsername(username)
@@ -42,6 +59,15 @@ public class BusService {
         // Fetch buses by operator
         return busRepository.findByBusOperator(operator);
     }
+
+    /**
+     * Adds or updates amenities for a bus for a given operator.
+     *
+     * @param amenitiesDTO The DTO containing the amenities to be added.
+     * @param username     The username of the bus operator.
+     * @return The updated bus with the new amenities.
+     * @throws ResourceNotFoundException if no bus or operator is found.
+     */
 
     public Bus addAmenitiesToBus(BusAmenitiesDTO amenitiesDTO, String username) {
         BusOperator operator = busOperatorRepository.findByUserUsername(username)
@@ -90,13 +116,21 @@ public class BusService {
         if (amenitiesDTO.isCctvCameras())
             amenitiesStr.append("cctvCameras,");
 
-        // Remove last comma if needed
+        
         String amenitiesCsv = amenitiesStr.toString().replaceAll(",$", "");
 
         bus.setAmenities(amenitiesCsv);
 
         return busRepository.save(bus);
     }
+
+    /**
+     * Fetches the amenities associated with a bus for a given operator.
+     *
+     * @param username The username of the bus operator.
+     * @return A DTO containing the amenities of the bus.
+     * @throws ResourceNotFoundException if no bus or operator is found.
+     */
 
     public BusAmenitiesDTO getAmenitiesForBus(String username) {
         BusOperator operator = busOperatorRepository.findByUserUsername(username)
@@ -167,6 +201,43 @@ public class BusService {
         }
 
         return amenitiesDTO;
+    }
+
+    /**
+     * Fetches a bus by its ID.
+     *
+     * @param busId The ID of the bus to be fetched.
+     * @return The bus with the specified ID.
+     * @throws ResourceNotFoundException if no bus is found with the given ID.
+     */
+
+    public Bus getBusById(int busId) {
+        return busRepository.findById(busId)
+                .orElseThrow(() -> new ResourceNotFoundException("Bus not found with ID: " + busId));
+    }
+
+    /**
+     * Updates the details of an existing bus.
+     *
+     * @param busId The ID of the bus to be updated.
+     * @param bus   The bus object containing updated details.
+     * @return The updated bus object.
+     * @throws ResourceNotFoundException if no bus is found with the given ID.
+     */
+
+    public Bus updateBusDetails(int busId, Bus bus) {
+
+        Bus existingBus = busRepository.findById(busId)
+                .orElseThrow(() -> new ResourceNotFoundException("Bus not found with ID: " + busId));
+
+        existingBus.setBusName(bus.getBusName());
+        existingBus.setBusNumber(bus.getBusNumber());
+        existingBus.setCapacity(bus.getCapacity());
+        existingBus.setBusClass(bus.getBusClass());
+        existingBus.setBusType(bus.getBusType());
+        existingBus.setActive(bus.isActive());
+
+        return busRepository.save(existingBus);
     }
 
 }

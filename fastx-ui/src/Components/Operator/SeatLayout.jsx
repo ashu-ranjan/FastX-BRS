@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import '../../css/SeatLayout.css';
+import '../Operator/css/SeatLayout.css';
 import { FaChair } from 'react-icons/fa';          // For Seater icon
 import { FaBusSimple } from 'react-icons/fa6';     // For heading icon
 

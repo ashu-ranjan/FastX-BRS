@@ -16,12 +16,17 @@ public class SeatController {
     @Autowired
     private SeatService seatService;
 
-    /*
-     * AIM: adding seat to db
-     * PATH: /fastx/add/seat/{busId}
-     * METHOD: POST
-     * RESPONSE: Seat
-     * */
+    /**
+     * @aim add seat to bus
+     * @description This method allows an operator to add a seat to a specific bus.
+     * @path /fastx/add/seat/{busId}
+     * @method POST
+     * @param busId The ID of the bus to which the seat is being added.
+     * @param seat The seat object containing the seat details.
+     * @param principal The principal object representing the authenticated user.
+     * @return ResponseEntity containing the created seat.
+     * @throws IllegalAccessException
+     */
     @PostMapping("/add/seat/{busId}")
     public ResponseEntity<?> addSeatToBus(@PathVariable int busId,
                                           @RequestBody Seat seat,
@@ -43,23 +48,29 @@ public class SeatController {
         return ResponseEntity.ok(seatService.getAvailableSeatsForSchedule(scheduleId));
     }
 
-    /*
-     * AIM: get seats by busId
-     * PATH: /fastx/get/seats/bus/{busId}
-     * METHOD: GET
-     * RESPONSE: Seat
+    /**
+     * @aim get all seats by bus id
+     * @path /fastx/get/seats/bus/{busId}
+     * @method GET
+     * @description Get all seats by bus id
+     * @return List<SeatResponseDTO>
+     * 
      */
     @GetMapping("/get/seats/bus/{busId}")
     public ResponseEntity<?> getSeatsByBusId(@PathVariable int busId) {
         return ResponseEntity.ok(seatService.getSeatsByBusId(busId));
     }
 
-    /*
-     * AIM: update seat 
-     * PATH: /fastx/update/seat/{seatId}
-     * METHOD: PUT
-     * RESPONSE: SeatDTO
-     * 
+    /**
+     * @aim update seat
+     * @path /fastx/update/seat/{seatId}
+     * @method PUT
+     * @description Update a seat by its ID
+     * @param seatId The ID of the seat to be updated.
+     * @param seatDTO The SeatDTO object containing the updated seat details.
+     * @param principal The principal object representing the authenticated user.
+     * @return ResponseEntity containing the updated SeatDTO.
+     * @throws IllegalAccessException
      */
     @PutMapping("/update/seat/{seatId}")
     public ResponseEntity<?> updateSeat(@PathVariable int seatId,
@@ -70,5 +81,8 @@ public class SeatController {
         return ResponseEntity.ok(updatedSeat);
     }
 
+    
+
+    
 
 }

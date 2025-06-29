@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import OperatorNavbar from "./OperatorNavbar";
 import { Outlet, useNavigate } from "react-router-dom";
-import '../../css/OperatorDashboard.css';
+import '../Operator/css/OperatorDashboard.css';
 
 function OperatorDashboard() {
   const navigate = useNavigate();

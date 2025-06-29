@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaMapMarkerAlt, FaRoad, FaLocationArrow, FaRoute } from 'react-icons/fa';
-import '../../css/addRoute.css'; // Include the CSS below
+import '../Operator/css/addRoute.css'; // Include the CSS below
 
 function AddRoute() {
   const [origin, setOrigin] = useState('');

@@ -8,7 +8,7 @@ import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
 import { FaRoute, FaMapMarkerAlt, FaLocationArrow, FaRoad, FaPlus } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import '../../css/busroute.css';
+import '../Operator/css/busroute.css';
 
 function BusRoutes() {
   const [routes, setRoutes] = useState([]);

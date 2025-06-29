@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import '../../css/AddBusComponent.css'; // Optional: your custom styles
+import '../Operator/css/AddBusComponent.css'; // Optional: your custom styles
 import { useNavigate } from 'react-router-dom';
 import { MultiSelect } from 'primereact/multiselect';
 
@@ -96,7 +96,7 @@ function AddBusComponent() {
                         <select
                             className="form-select"
                             value={busType}
-                            onChange={(e) => setBusType(e.target.value)}
+                            onChange={($e) => setBusType($e.target.value)}
                             required
                         >
                             <option value="">Select Bus Type</option>

@@ -17,6 +17,9 @@ public class Bus {
     @Column(name = "bus_number")
     private String busNumber;
 
+    @Column(name = "bus_class")
+    private String BusClass;
+
     @Enumerated(EnumType.STRING) // To store enum value as string (AC_SLEEPER, NON_AC_SLEEPER, etc.)
     @Column(name = "bus_type")
     private BusType busType;
@@ -27,6 +30,8 @@ public class Bus {
     private String amenities;
 
     private String imageUrl;
+
+    private boolean isActive = true; // Default to true, indicating the bus is active
 
     @ManyToOne
     private BusOperator busOperator;
@@ -93,5 +98,18 @@ public class Bus {
     }
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getBusClass() {
+        return BusClass;
+    }
+    public void setBusClass(String busClass) {
+        BusClass = busClass;
+    }
+    public boolean isActive() {
+        return isActive;
+    }
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }

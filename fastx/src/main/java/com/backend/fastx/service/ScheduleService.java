@@ -35,6 +35,15 @@ public class ScheduleService {
         this.busRouteRepository = busRouteRepository;
     }
 
+    /**
+     * Creates a new schedule for a bus on a specific route.
+     *
+     * @param schedule The schedule to be created.
+     * @param busId    The ID of the bus for which the schedule is being created.
+     * @param routeId  The ID of the bus route for which the schedule is being created.
+     * @return The created Schedule object.
+     */
+
     public Schedule createSchedule(Schedule schedule, int busId, int routeId) {
         scheduleUtility.validateSchedule(schedule);
 
@@ -57,14 +66,37 @@ public class ScheduleService {
         return scheduleRepository.save(schedule);
     }
 
+    /**
+     * Updates an existing schedule.
+     *
+     * @param schedule The schedule to be updated.
+     * @return The updated Schedule object.
+     */
+
     public List<Schedule> getAllSchedules() {
         return scheduleRepository.findAll();
     }
+
+    /**
+     * Retrieves a schedule by its ID.
+     *
+     * @param id The ID of the schedule to be retrieved.
+     * @return The Schedule object with the given ID.
+     */
 
     public Schedule getScheduleById(int id) {
         return scheduleRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Invalid Id, No Schedule found!!"));
     }
+
+    /**
+     * Retrieves a list of bus schedules based on the origin, destination, and date.
+     *
+     * @param origin      The origin location of the bus route.
+     * @param destination The destination location of the bus route.
+     * @param date        The date for which the schedule is requested.
+     * @return A list of BusScheduleDto containing schedule details.
+     */
 
     public List<BusScheduleDto> getScheduleByRouteAndDate(String origin, String destination, LocalDate date) {
 
@@ -75,6 +107,7 @@ public class ScheduleService {
 
         return schedules.stream().map(schedule -> new BusScheduleDto(
                 schedule.getId(),
+                schedule.getBus().getId(),
                 schedule.getBus().getBusName(),
                 schedule.getBus().getBusType().name(),
                 schedule.getDepartureTime(),
@@ -82,5 +115,22 @@ public class ScheduleService {
                 schedule.getDuration(),
                 FareUtility.calculateBusFare(schedule)
         )).toList();
+    }
+
+    /**
+     * Retrieves a list of schedules for a specific bus by its ID.
+     *
+     * @param busId The ID of the bus for which the schedules are requested.
+     * @return A list of Schedule objects associated with the given bus ID.
+     */
+
+    public List<Schedule> getScheduleByBusId(int busId) {
+        Bus bus = busRepository.findById(busId)
+                .orElseThrow(() -> new ResourceNotFoundException("No Bus found for ID: " + busId));
+        List<Schedule> schedules = scheduleRepository.findByBus(bus);
+        if (schedules.isEmpty()) {
+            throw new ResourceNotFoundException("No Schedule found for Bus ID: " + busId);
+        }
+        return schedules;
     }
 }

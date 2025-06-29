@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle, FaFacebookF, FaTwitter } from "react-icons/fa";
-import '../css/Auth.css';
+import '../Components/Auth.css';
 
 function Login() {
     const [username, setUsername] = useState("");
@@ -33,7 +33,6 @@ function Login() {
                 case "CUSTOMER": navigate("/customer"); break;
                 case "OPERATOR": navigate("/operator"); break;
                 case "EXECUTIVE": navigate("/executive"); break;
-                case "CEO": navigate("/ceo"); break;
                 default: setMsg("Login Disabled, Contact Admin");
             }
         } catch (error) {
@@ -46,7 +45,7 @@ function Login() {
             <div className="left-content">
                 <div className="logo-container">
                     <img src="/images/fxlogo.png" alt="FastX Logo" className="logo-image" />
-                    <h1 className="brand-name" style={{ fontSize: "60px" }}>FastX</h1>
+                    <h1 className="brand-name" style={{ fontSize: "60px" , marginLeft: "20px"}}>FastX</h1>
                 </div>
                 <div className="welcome-text">
                     <h2>Welcomes you Back!</h2>
@@ -108,7 +107,9 @@ function Login() {
                         </div>
 
                         <div className="register-link">
-                            Don't have an account? <Link to="/register">Register</Link>
+                            Don't have an account? <Link to="/customer-registration">Register</Link>
+                            <br />
+                            Join as an <Link to="/register">Operator</Link> or <Link to="/executive-registration">Executive</Link>
                         </div>
                     </form>
                 </div>

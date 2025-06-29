@@ -43,6 +43,17 @@ public class FeedbackService {
         this.busRepository = busRepository;
     }
 
+    /**
+     * Submits feedback for a booking.
+     *
+     * @param feedbackDTO The feedback data transfer object containing feedback details.
+     * @param username    The username of the customer submitting the feedback.
+     * @return A map containing a success message.
+     * @throws ResourceNotFoundException if the booking is not found.
+     * @throws UserAccessDeniedException if the user is not authorized to give feedback.
+     * @throws IllegalStateException if feedback has already been submitted for the booking.
+     */
+
     public Object submitFeedback(FeedbackDTO feedbackDTO, String username) {
 
         Booking booking = bookingRepository.findById(feedbackDTO.getBooingId())
@@ -71,6 +82,15 @@ public class FeedbackService {
 
     }
 
+    /**
+     * Retrieves feedback submitted by the operator.
+     *
+     * @param username The username of the operator.
+     * @return A list of FeedbackSummaryDTO containing feedback details.
+     * @throws ResourceNotFoundException if the user is not found.
+     * @throws UserAccessDeniedException if the user is not an operator.
+     */
+   
     public List<FeedbackSummaryDTO> getFeedbackForOperator(String username) {
 
         User user = userRepository.findByUsername(username)
@@ -107,6 +127,15 @@ public class FeedbackService {
         dto.setBookingId(feedback.getBooking().getId());
         return dto;
     }
+
+
+    /**
+     * Retrieves feedback summary for a specific bus.
+     *
+     * @param busId The ID of the bus for which feedback is requested.
+     * @return A FeedbackCommentSummaryDTO containing average rating and comments.
+     * @throws ResourceNotFoundException if the bus is not found.
+     */
 
     public FeedbackCommentSummaryDTO getFeedbackSummaryForBus(int busId) {
 

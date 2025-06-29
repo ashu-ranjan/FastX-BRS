@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface ExecutiveRepository extends JpaRepository<Executive, Integer> {
     @Query("SELECT e FROM Executive e WHERE e.user.username = ?1")
     Optional<Executive> getExecutiveByUsername(String username);
+
+    Optional<Executive> findByEmail(String email);
 }

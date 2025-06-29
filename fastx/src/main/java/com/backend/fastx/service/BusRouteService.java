@@ -19,10 +19,23 @@ public class BusRouteService {
         this.busRouteUtility = busRouteUtility;
     }
 
+    /**
+     * @aim Add a new bus route
+     * @description This method will add a new bus route to the system.
+     * @param busRoute
+     * @return BusRoute
+     */
+
     public BusRoute addRoute(BusRoute busRoute) {
         busRouteUtility.validateBusRoute(busRoute);
         return busRouteRepository.save(busRoute);
     }
+
+    /**
+     * @aim Get all bus routes
+     * @description This method retrieves all bus routes from the system.
+     * @return List<BusRoute>
+     */
 
     public List<BusRoute> getAllRoutes() {
         return busRouteRepository.findAll();

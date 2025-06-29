@@ -8,6 +8,10 @@ public class PaymentResponseDTO {
     private PaymentStatus paymentStatus;
     private double amount;
 
+    public PaymentResponseDTO() {
+        // Default constructor
+    }
+
     public PaymentResponseDTO(int paymentId, PaymentStatus paymentStatus, double amount) {
         this.paymentId = paymentId;
         this.paymentStatus = paymentStatus;
